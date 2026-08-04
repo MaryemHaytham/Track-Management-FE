@@ -48,7 +48,7 @@ export class TrackListComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Could not load the catalog. Confirm the API is running on http://localhost:5222.';
+        this.error = 'Could not load the catalog. Confirm the API is running on https://localhost:7139.';
         this.loading = false;
       }
     });
