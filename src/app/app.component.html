@@ -1,0 +1,25 @@
+@if (showShell()) {
+  <div class="app-shell">
+    <header class="topbar">
+      <a routerLink="/tracks" class="brand">
+        <strong>Takwene</strong>
+        <span>Distribution Desk</span>
+      </a>
+
+      <div class="actions">
+        @if (isAuthenticated()) {
+          <span class="user">{{ username() }}</span>
+          <button type="button" (click)="logout()">Sign out</button>
+        } @else {
+          <a routerLink="/login">Sign in</a>
+        }
+      </div>
+    </header>
+
+    <main>
+      <router-outlet />
+    </main>
+  </div>
+} @else {
+  <router-outlet />
+}

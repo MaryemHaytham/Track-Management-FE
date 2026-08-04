@@ -1,0 +1,128 @@
+<section class="detail-page">
+  <a routerLink="/tracks" class="back-link">← Back to catalog</a>
+
+  @if (loading) {
+    <p class="state">Loading track details…</p>
+  } @else if (error) {
+    <p class="state error">{{ error }}</p>
+  } @else if (track) {
+    <header class="hero">
+      <div class="cover" [attr.data-genre]="track.genre">
+        <span>{{ track.title.slice(0, 1) }}</span>
+      </div>
+      <div>
+        <p class="eyebrow">Track dossier</p>
+        <h1>{{ track.title }}</h1>
+        <p class="subtitle">{{ track.artistName }} · {{ track.genre }}</p>
+        <span class="badge" [attr.data-status]="track.status">{{ track.status }}</span>
+      </div>
+    </header>
+
+    <dl class="meta">
+      <div>
+        <dt>ISRC</dt>
+        <dd>{{ track.isrc }}</dd>
+      </div>
+      <div>
+        <dt>Release date</dt>
+        <dd>{{ track.releaseDate }}</dd>
+      </div>
+      <div>
+        <dt>Artist</dt>
+        <dd>{{ track.artistName }}</dd>
+      </div>
+      <div>
+        <dt>Genre</dt>
+        <dd>{{ track.genre }}</dd>
+      </div>
+    </dl>
+
+    @if (actionMessage) {
+      <p class="flash ok">{{ actionMessage }}</p>
+    }
+    @if (actionError) {
+      <p class="flash error">{{ actionError }}</p>
+    }
+
+    <div class="actions">
+      <section class="panel">
+        <h2>Lifecycle status</h2>
+        <p class="help">Move the track through draft → submitted → distributed.</p>
+        <div class="row">
+          <select [(ngModel)]="selectedStatus">
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ status }}</option>
+            }
+          </select>
+          <button type="button" (click)="updateStatus()" [disabled]="actionLoading">
+            Update status
+          </button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Distribute to DSPs</h2>
+        <p class="help">Select one or more platforms. Draft tracks must be submitted first.</p>
+
+        <div class="dsp-list">
+          @for (dsp of dsps; track dsp.id) {
+            <label [class.disabled]="isAlreadyDistributed(dsp.id)">
+              <input
+                type="checkbox"
+                [checked]="isDspSelected(dsp.id)"
+                [disabled]="isAlreadyDistributed(dsp.id) || actionLoading"
+                (change)="toggleDsp(dsp.id, $any($event.target).checked)"
+              />
+              <span>{{ dsp.name }}</span>
+              @if (isAlreadyDistributed(dsp.id)) {
+                <em>already sent</em>
+              }
+            </label>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="primary"
+          (click)="distribute()"
+          [disabled]="actionLoading || selectedDspIds.size === 0"
+        >
+          Submit to selected DSPs
+        </button>
+      </section>
+    </div>
+
+    <section class="distributions panel">
+      <h2>DSP distribution status</h2>
+
+      @if (track.distributions.length === 0) {
+        <p class="state quiet">Not submitted to any DSP yet.</p>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>DSP</th>
+                <th>Submitted</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (distribution of track.distributions; track distribution.id) {
+                <tr>
+                  <td>{{ distribution.dspName }}</td>
+                  <td>{{ distribution.submittedAt | date: 'medium' }}</td>
+                  <td>
+                    <span class="badge" [attr.data-status]="distribution.status">
+                      {{ distribution.status }}
+                    </span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  }
+</section>

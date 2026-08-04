@@ -1,0 +1,47 @@
+<section class="login-page">
+  <div class="login-stage">
+    <div class="brand-panel">
+      <p class="eyebrow">Music distribution</p>
+      <h1>Takwene</h1>
+      <p class="lede">
+        Manage artists, tracks, and DSP deliveries across Spotify, Apple Music, and YouTube Music.
+      </p>
+      <ul class="points">
+        <li>Catalog status from draft to live</li>
+        <li>Submit tracks to multiple DSPs</li>
+        <li>Track distribution outcomes in one place</li>
+      </ul>
+    </div>
+
+    <form class="login-card" (ngSubmit)="submit()">
+      <h2>Sign in</h2>
+      <p class="hint">Use your distributor credentials to access the catalog.</p>
+
+      <label>
+        <span>Username</span>
+        <input [(ngModel)]="username" name="username" autocomplete="username" required />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+      </label>
+
+      @if (error) {
+        <p class="error">{{ error }}</p>
+      }
+
+      <button type="submit" [disabled]="loading || !username || !password">
+        {{ loading ? 'Signing in…' : 'Enter catalog' }}
+      </button>
+
+      <p class="demo">Demo: admin / Admin&#64;123</p>
+    </form>
+  </div>
+</section>

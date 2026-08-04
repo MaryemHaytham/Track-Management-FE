@@ -1,0 +1,85 @@
+<section class="catalog-page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Release catalog</p>
+      <h1>Tracks ready for distribution</h1>
+      <p class="subtitle">
+        Review artist releases, filter by lifecycle status, and open a track to manage DSP delivery.
+      </p>
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <article>
+      <span>Catalog</span>
+      <strong>{{ counts().total }}</strong>
+    </article>
+    <article>
+      <span>Draft</span>
+      <strong>{{ counts().draft }}</strong>
+    </article>
+    <article>
+      <span>Submitted</span>
+      <strong>{{ counts().submitted }}</strong>
+    </article>
+    <article>
+      <span>Distributed</span>
+      <strong>{{ counts().distributed }}</strong>
+    </article>
+  </div>
+
+  <div class="toolbar">
+    <div class="filters" role="group" aria-label="Filter by status">
+      <button type="button" [class.active]="selectedStatus() === ''" (click)="setStatus('')">
+        All
+      </button>
+      <button type="button" [class.active]="selectedStatus() === 'Draft'" (click)="setStatus('Draft')">
+        Draft
+      </button>
+      <button
+        type="button"
+        [class.active]="selectedStatus() === 'Submitted'"
+        (click)="setStatus('Submitted')"
+      >
+        Submitted
+      </button>
+      <button
+        type="button"
+        [class.active]="selectedStatus() === 'Distributed'"
+        (click)="setStatus('Distributed')"
+      >
+        Distributed
+      </button>
+    </div>
+  </div>
+
+  @if (loading) {
+    <p class="state">Loading catalog…</p>
+  } @else if (error) {
+    <p class="state error">{{ error }}</p>
+  } @else if (tracks().length === 0) {
+    <p class="state">No tracks match this filter.</p>
+  } @else {
+    <div class="track-grid">
+      @for (track of tracks(); track track.id) {
+        <a class="track-card" [routerLink]="['/tracks', track.id]">
+          <div class="cover" [attr.data-genre]="track.genre">
+            <span>{{ track.title.slice(0, 1) }}</span>
+          </div>
+          <div class="body">
+            <div class="top">
+              <h2>{{ track.title }}</h2>
+              <span class="badge" [attr.data-status]="track.status">{{ track.status }}</span>
+            </div>
+            <p class="artist">{{ track.artistName }}</p>
+            <div class="meta">
+              <span>{{ track.genre }}</span>
+              <span>{{ track.releaseDate }}</span>
+              <span class="isrc">{{ track.isrc }}</span>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  }
+</section>

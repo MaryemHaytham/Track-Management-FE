@@ -1,0 +1,249 @@
+.catalog-page {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.hero h1 {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.02;
+}
+
+.subtitle {
+  margin: 0.55rem 0 0;
+  max-width: 52ch;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: var(--font-body);
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.stat-row article {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.stat-row span {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat-row strong {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.filters button {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: rgba(45, 212, 191, 0.14);
+  border-color: rgba(45, 212, 191, 0.45);
+  color: #dffcf7;
+}
+
+.track-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.track-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.track-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 163, 115, 0.4);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.cover {
+  width: 72px;
+  height: 72px;
+  border-radius: 0.85rem;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #0b1220;
+  background: linear-gradient(145deg, #d4a373, #2dd4bf);
+}
+
+.cover[data-genre='Pop'] {
+  background: linear-gradient(145deg, #f0ab80, #ea8c6b);
+}
+
+.cover[data-genre='Electronic'] {
+  background: linear-gradient(145deg, #67e8f9, #2dd4bf);
+}
+
+.cover[data-genre='Hip-Hop'] {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+}
+
+.cover[data-genre='Rock'] {
+  background: linear-gradient(145deg, #fb7185, #f43f5e);
+}
+
+.cover[data-genre='Jazz'],
+.cover[data-genre='R&B'],
+.cover[data-genre='Indie'] {
+  background: linear-gradient(145deg, #a7f3d0, #34d399);
+}
+
+.body {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.top h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.artist {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: rgba(245, 239, 230, 0.68);
+}
+
+.isrc {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge[data-status='Draft'] {
+  background: rgba(148, 163, 184, 0.2);
+  color: #dbe4f0;
+}
+
+.badge[data-status='Submitted'] {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fde68a;
+}
+
+.badge[data-status='Distributed'] {
+  background: rgba(45, 212, 191, 0.16);
+  color: #99f6e4;
+}
+
+.state {
+  padding: 1.1rem;
+  border: 1px dashed var(--line);
+  border-radius: 0.9rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+
+.state.error {
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(127, 29, 29, 0.25);
+  color: #fecaca;
+}
+
+@media (max-width: 720px) {
+  .stat-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .track-card {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .cover {
+    width: 60px;
+    height: 60px;
+  }
+}
