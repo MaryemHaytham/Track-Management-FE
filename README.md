@@ -11,7 +11,9 @@ npm start
 
 App: `http://localhost:4200`
 
-API expected at: `https://localhost:7139/api` (configured in `src/environments/environment.ts`)
+API expected in local dev: `https://localhost:7139/api` (configured in `src/environments/environment.ts`)
+
+Production API base URL is configured in `src/environments/environment.prod.ts`.
 
 ## Features
 
